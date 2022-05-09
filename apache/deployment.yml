@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: apache
+spec:
+  serviceName: "httpd"
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: apache-test
+  template:
+    metadata:
+      labels:
+        app: apache-test
+    spec:
+      containers:
+        - image: httpd:alpine
+          name: apache-test
+          ports:
+            - containerPort: 80
+
+
